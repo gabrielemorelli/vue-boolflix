@@ -1,24 +1,24 @@
 <template>
   <div>
-      <CardFilms v-for="(film, index) in films" :key="index" :film='film'/>
+    <h1>Lista Film</h1>
+    <MyCard v-for="(film, index) in films" :key="index" :info="film" />
   </div>
 </template>
 
 <script>
+import MyCard from "./partials/MyCard.vue";
 
-import CardFilms from './partials/CardFilms.vue';
 export default {
-    name:"ListaFilms",
-     props: {
-        'films': Array
-    },
+  name: "ListaFilms",
+  props: {
+    'films': Array,
+  },
 
-    components: {
-        CardFilms
-    }
-}
+  components: {
+    MyCard
+  }
+};
 </script>
 
 <style>
-
 </style>

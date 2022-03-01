@@ -2,8 +2,8 @@
   <header>
     <div class="title">BOOLFLIX</div>
     <div class="button">
-      <input type="text" v-model="searchFilm">
-      <button type="submit" @click="$emit('search',searchFilm)">Ricerca</button>
+      <input type="text" v-model="searchText">
+      <button type="submit" @click="$emit('search', searchText)">Ricerca</button>
       
     </div>
   </header>
@@ -14,7 +14,8 @@ export default {
   name: "MyHeader",
   data() {
     return {
-      searchFilm: ''
+      searchText: ''
+    
      
     };
   },

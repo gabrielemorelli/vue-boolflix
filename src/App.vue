@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <MyHeader @search='getFilms' />
-    <MyMain :films="films"/>
+      <MyHeader @search="getFilms" />
+    <MyMain :films="films" :series="series" />
   </div>
 </template>
 
@@ -17,21 +17,32 @@ export default {
   name: "App",
   components: {
     MyHeader,
-    MyMain,
+    MyMain
   },
 
   data() {
     return {
       films: [],
+      series: [],
+      api_key:'a26861d7ebab234184ab088f81a0bb79',
+      language:'it-IT'
+    
     };
   },
   methods: {
-    getfilms(keyword) {
+    getFilms(keyword) {
+      const params = {
+     params:{
+        'api_key': this.api_key,
+        'query':keyword,
+        'language':this.language
+      }
+      };
+ 
+      
       axios
         .get(
-          "https://api.themoviedb.org/3/search/movie/550?api_key=a26861d7ebab234184ab088f81a0bb79&query=" +
-            keyword + '&language =it-IT'
-        )
+          'https://api.themoviedb.org/3/search/movie/',params)
 
         .then((response) => {
           this.films = response.data.results;
@@ -41,10 +52,28 @@ export default {
           // handle error
           console.log(error);
         });
+        
+      axios
+        .get(
+          "https://api.themoviedb.org/3/search/tv/",params)
+
+        .then((response) => {
+          this.series = response.data.results;
+         
+        })
+
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+        });
     },
+    
   },
+ 
 };
+
 </script>
 
 <style lang="scss">
+
 </style>
